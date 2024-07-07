@@ -70,7 +70,7 @@ This project is a web scraping tool designed to automate the process of scraping
    ```
 
 
-[![LinkedIn](https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white)]([https://www.linkedin.com/your-profile-url](https://www.linkedin.com/in/vedansh-kapoor-478490153/))
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/vedansh-kapoor-478490153/)
 
 
 

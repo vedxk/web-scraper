@@ -38,7 +38,7 @@ class JsonWriterPipeline(object):
             os.makedirs('output')
         if not os.path.exists('output/products.json'):
             with open('output/products.json', 'w', encoding='utf-8') as f:
-                f.write('[]')
+                f.write('[')
         self.file = open('output/products.json', 'a', encoding='utf-8') 
 
     def close_spider(self, spider):
@@ -85,17 +85,19 @@ class JsonWriterPipeline(object):
             self.cache.cached_dict[product_title] = item
             self.updated_count += 1
 
-        if not self.file.tell() == 2:  # Check if file is not empty (2 accounts for initial [])
-            if self.file.tell() > 0:
-                self.file.seek(self.file.tell() - 1)
-                self.file.truncate()
-                self.file.write(',\n')
-            else:
-                self.file.write('[')
-        line = json.dumps(dict(item), ensure_ascii=False, indent=4)
-        self.file.write(line)
-        self.file.write('\n]')
-
+        try:
+            if not self.file.tell() == 1:  # Check if file is not empty (2 accounts for initial [])
+                if self.file.tell() > 0:
+                    self.file.seek(self.file.tell() - 1)
+                    self.file.truncate()
+                    self.file.write(',\n')
+                else:
+                    self.file.write('[')
+            line = json.dumps(dict(item), ensure_ascii=False, indent=4)
+            self.file.write(line)
+            self.file.write('\n]')
+        except Exception as e:
+            raise RuntimeError(f"Error writing to file: {e}")
 
         return item
 
@@ -129,4 +131,3 @@ class MyFilesPipeline(FilesPipeline):
             raise DropItem(f"Failed to download {item['product_title']}")
         item.pop('image_url', None)
         return item
-

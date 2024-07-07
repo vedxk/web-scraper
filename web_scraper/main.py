@@ -35,7 +35,6 @@ class TokenVerifier:
     # Token configuration for static token(hardcoded)
     config = configparser.ConfigParser()
     config.read('config.ini')
-
     STATIC_TOKEN = config['DEFAULT']['STATIC_TOKEN']
     def verify_token(self, request: Request):
         token = request.headers.get('Authorization')
@@ -59,3 +58,5 @@ def scrape(scrape_request: ScrapeRequest):
 
     if result != "completed":
         raise HTTPException(status_code=500, detail=f"Scraping failed: {result}")
+    
+    return "Scraping Succesful"

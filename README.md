@@ -1,4 +1,5 @@
 # web-scraper
+
 This project is a web scraping tool designed to automate the process of scraping information from a specific webpage. It leverages Scrapy for the scraping process, incorporates middleware for retries, uses FastAPI and Uvicorn to provide an API interface, and utilizes Redis for caching results. The scraped data is stored locally in a JSON file.
 
 ## Table of Contents
@@ -27,7 +28,7 @@ This project is a web scraping tool designed to automate the process of scraping
 1. Clone the repository:
     ```sh
     git clone https://github.com/yourusername/web-scraper.git
-    cd web-scraper
+    cd web-scraper/web_scraper
     ```
 
 2. Create a virtual environment:
@@ -63,8 +64,13 @@ This project is a web scraping tool designed to automate the process of scraping
   curl -X POST "http://localhost:8000/scrape" -H "Authorization: your_token" -H "Content-Type: application/json" -d '{"start_page": 1, "end_page": 5, "proxy": "http://yourproxy:port"}'
   ```
 
-3. There is a test script scraping_endpoint_test.py in the repo which can achieve the same.
+3. There is a test script in the repo which can achieve the same.
+   ```sh
+   python3 scraping_endpoint_test.py
+   ```
 
+
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white)]([https://www.linkedin.com/your-profile-url](https://www.linkedin.com/in/vedansh-kapoor-478490153/))
 
 
 

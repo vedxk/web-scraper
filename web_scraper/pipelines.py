@@ -9,7 +9,7 @@ from notification_handler import NotificationHandler
 # Redis client
 redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
 
-# Notification handler instance
+#Notification handler instance
 notification_handler = NotificationHandler()
 
 class ProductCache:
@@ -25,6 +25,7 @@ class ProductCache:
         else:
             # Set the 'scraped_products' key to an empty list initially if it doesn't exist
             redis_client.set('scraped_products', json.dumps([]))
+            redis_client.set('updated_count', 0)
             return [], {}
 
 class JsonWriterPipeline(object):
@@ -53,7 +54,7 @@ class JsonWriterPipeline(object):
             else:
                 print(f"Warning: Item {item} is not JSON serializable.")
         redis_client.set('scraped_products', json.dumps(serializable_products))
-        notification_handler.send_notification(self.updated_count)
+        redis_client.set('updated_count', self.updated_count)
 
     def process_item(self, item, spider):
         product_title = item['product_title']

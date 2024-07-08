@@ -1,6 +1,5 @@
 import scrapy
 from items import DentalItem
-from concurrent.futures import ThreadPoolExecutor
 
 class DentalSpider(scrapy.Spider):
     name = 'dental_stall'

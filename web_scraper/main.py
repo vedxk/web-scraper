@@ -6,6 +6,7 @@ from spiders.scrape_spider import DentalSpider
 from typing import Union
 from multiprocessing import Process, Queue
 import configparser
+from notification_handler import NotificationHandler
 
 # FastAPI instance
 app = FastAPI()
@@ -59,4 +60,5 @@ def scrape(scrape_request: ScrapeRequest):
     if result != "completed":
         raise HTTPException(status_code=500, detail=f"Scraping failed: {result}")
     
-    return "Scraping Succesful"
+    notification_handler = NotificationHandler()
+    return notification_handler.get_count()

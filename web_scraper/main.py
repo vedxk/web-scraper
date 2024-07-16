@@ -51,6 +51,9 @@ def scrape(scrape_request: ScrapeRequest):
     end_page = scrape_request.end_page
     proxy = scrape_request.proxy
 
+    if start_page > end_page:
+        raise HTTPException(status_code=400, detail="The starting page must be less than the end page")
+
     q = Queue()
     p = Process(target=spider_runner.run_spider, args=(start_page, end_page, proxy, q))
     p.start()
